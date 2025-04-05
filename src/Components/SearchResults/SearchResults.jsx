@@ -1,15 +1,17 @@
-import { FaUserMd, FaVials, FaHospital, FaPills, FaAmbulance } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import {useNavigate } from 'react-router-dom';
-import './Search.css';
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Navbar from "../LandingPage/Navbar";
+import './SearchResults.css';
+import Card from "./Card";
 
-const Search = () => {
+const SearchResults = () => {
+    const location = useLocation();
+
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    const [medicalCenters, setMedicalCenters] = useState([]);
+    const [medicalCenters, setMedicalCenters] = useState(location.state?.medicalCenters || []);
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchState = async() => {
@@ -56,16 +58,17 @@ const Search = () => {
             const data = await response.json();
             console.log(data);
             setMedicalCenters(data);
-            navigate('/medical-centers', { state: { medicalCenters: medicalCenters } });
         }catch(error){
             console.error(error);
         }
     };
 
+
     return(
-        <div className="search">
-            <div className='search-container'>
-                <div className='search-form'>
+        <div className="search-results">
+            <Navbar />
+            <div className="search">
+                <div className="search-box">
                     <form onSubmit={(e) => findMedicalCenters(e)}>
                         <select value={selectedState} onChange={handleStateChange}>
                             <option value="" disabled>State</option>
@@ -82,34 +85,13 @@ const Search = () => {
                         <button type='submit'>Search</button>
                     </form>
                 </div>
-                <div className='search-categories'>
-                    <p>You may be looking for</p>
-                    <div className='categories'>
-                        <div className='category'>
-                            <FaUserMd size={60} style={{ color: 'rgba(42, 167, 255, 1)' }} />
-                            <p>Doctor</p>
-                        </div>
-                        <div className='category'>
-                            <FaVials size={60} style={{ color: 'rgba(42, 167, 255, 1)' }} />
-                            <p>Labs</p>
-                        </div>
-                        <div className='category'>
-                            <FaHospital size={60} style={{ color: 'rgba(42, 167, 255, 1)' }} />
-                            <p>Hospitals</p>
-                        </div>
-                        <div className='category'>
-                            <FaPills size={60} style={{ color: 'rgba(42, 167, 255, 1)' }} />
-                            <p>Medical Store</p>
-                        </div>
-                        <div className='category'>
-                            <FaAmbulance size={60} style={{ color: 'rgba(42, 167, 255, 1)' }} />
-                            <p>Ambulance</p>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div className="search-body">
+                <h2>Medical Centers in {selectedState}, {selectedCity}</h2>
+                <Card medicalCenters={medicalCenters}/>
             </div>
         </div>
     );
 };
 
-export default Search;
+export default SearchResults;

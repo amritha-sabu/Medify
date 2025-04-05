@@ -1,11 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './Components/LandingPage/LandingPage';
+import SearchResults from './Components/SearchResults/SearchResults';
 import './App.css'
-import LandingPage from './Components/LandingPage/LandingPage'
 
 function App() {
 
   return (
     <div>
-      <LandingPage />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/medical-centers" element={<SearchResults />} />
+        </Routes>
+      </Router>
     </div>
   )
 }

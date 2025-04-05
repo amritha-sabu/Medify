@@ -1,0 +1,39 @@
+.specialisation{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(81deg, #E7F0FF 9.01%, rgba(232, 241, 255, 0.47) 89.11%);
+}
+
+.specialisation h1{
+    font-size: 50px;
+    color: rgba(27, 60, 116, 1);
+}
+
+.specialisation-categories{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 20px;
+}
+
+.specialisation-category{
+    width: 270px;
+    height: 180px;
+    background-color: #ffffffe2;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 34px 44px 0px rgba(213, 219, 228, 0.44);
+}
+
+.specialisation-category p{
+    font-size: 20px;
+    font-weight: 400;
+    color: rgb(169, 169, 169);
+}
