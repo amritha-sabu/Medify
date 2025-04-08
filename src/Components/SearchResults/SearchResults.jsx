@@ -87,8 +87,15 @@ const SearchResults = () => {
                 </div>
             </div>
             <div className="search-body">
-                <h2>Medical Centers in {selectedState}, {selectedCity}</h2>
-                <Card medicalCenters={medicalCenters}/>
+                {medicalCenters.length ? 
+                (
+                    <div>
+                        <h2>Medical Centers in {selectedState}, {selectedCity}</h2>
+                        <Card medicalCenters={medicalCenters}/>
+                    </div>
+                ) : (
+                    <h2>No Medical Centers Found</h2>
+                )}
             </div>
         </div>
     );
