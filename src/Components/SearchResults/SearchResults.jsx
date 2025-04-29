@@ -9,9 +9,9 @@ const SearchResults = () => {
 
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    const [medicalCenters, setMedicalCenters] = useState(location.state?.medicalCenters || []);
-    const [selectedState, setSelectedState] = useState('');
-    const [selectedCity, setSelectedCity] = useState('');
+    const [medicalCenters, setMedicalCenters] = useState(location.state.medicalCenters || []);
+    const [selectedState, setSelectedState] = useState(location.state.selectedState || '');
+    const [selectedCity, setSelectedCity] = useState(location.state.selectedCity|| '');
 
     useEffect(() => {
         const fetchState = async() => {
@@ -67,8 +67,8 @@ const SearchResults = () => {
     return(
         <div className="search-results">
             <Navbar />
-            <div className="search">
-                <div className="search-box">
+            <div className="search-results-box">
+                <div className="search-results-form">
                     <form onSubmit={(e) => findMedicalCenters(e)}>
                         <select value={selectedState} onChange={handleStateChange}>
                             <option value="" disabled>State</option>
@@ -86,12 +86,14 @@ const SearchResults = () => {
                     </form>
                 </div>
             </div>
-            <div className="search-body">
+            <div className="search-results-body">
                 {medicalCenters.length ? 
                 (
                     <div>
-                        <h2>Medical Centers in {selectedState}, {selectedCity}</h2>
-                        <Card medicalCenters={medicalCenters}/>
+                        <h2>{medicalCenters.length} Medical Centers available in {selectedState}, {selectedCity}</h2>
+                        {medicalCenters.map((medicalCenter, index) => (
+                            <Card medicalCenter={medicalCenter} key={index}/>
+                        ))}
                     </div>
                 ) : (
                     <h2>No Medical Centers Found</h2>

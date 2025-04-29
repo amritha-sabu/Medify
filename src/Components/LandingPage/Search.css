@@ -8,7 +8,7 @@
 
 .search-container{
     width: 1270px;
-    height: 440px;
+    height: 400px;
     background-color: white;
     border-radius: 10px;
     z-index: 1;
@@ -38,6 +38,7 @@
     border-radius: 5px;
     font-size: 19px;
     padding: 15px;
+    cursor: pointer;
 }
 
 .search-categories p{

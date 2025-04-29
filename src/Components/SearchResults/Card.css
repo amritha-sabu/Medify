@@ -1,0 +1,51 @@
+.card{
+    width: 786px;
+    height: auto;
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.card-content{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.icon{
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    line-height: 1px;
+}
+
+.details h2{
+    color: rgba(42, 167, 255, 1);
+}
+
+.booking{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.rating{
+    width: 45px;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.book-now{
+
+}

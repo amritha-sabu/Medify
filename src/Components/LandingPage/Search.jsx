@@ -56,9 +56,11 @@ const Search = () => {
             const data = await response.json();
             console.log(data);
             setMedicalCenters(data);
-            navigate('/medical-centers', { state: { medicalCenters: medicalCenters } });
+            navigate('/medical-centers', { state: { medicalCenters: data, 
+                selectedState : selectedState,
+                selectedCity : selectedCity } });
         }catch(error){
-            console.error(error);
+            console.error(error, `cannot fetch ${medicalCenters}`);
         }
     };
 
