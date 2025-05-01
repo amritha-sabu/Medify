@@ -1,9 +1,49 @@
 import { FaHospital, FaThumbsUp  } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import './Card.css';
+import { useState } from 'react';
 
 const Card = ({medicalCenter}) => {
+    const [showCalendar, setShowCalendar] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(null);
+
+    const displayCalendar = () => {
+        setShowCalendar(!showCalendar);
+    };
+
+    const handleDaySelection = (index) => {
+        setSelectedIndex(index);
+    }
+
+    const generateWeekDays = () => {
+        const days = [];
+        const today = new Date();
+
+        for(let i = 0; i < 7; i ++){
+            const date = new Date();
+            date.setDate(today.getDate() + i);
+
+            const dayLabel = 
+            i === 0 ? 'Today'
+            : i === 1 ? 'Tomorrow'
+            : date.toLocaleDateString('en-US', {weekday : 'short'});
+
+            const formattedDate = date.toLocaleDateString('en-US', {
+                day : 'numeric',
+                month : 'short'
+            });
+
+            days.push(`${dayLabel}, ${formattedDate}`);
+        }
+
+        return days;
+    };
+
+    const weekDays = generateWeekDays();
+
     return(
-        <div className="card">
+        <div className="card" onClick={displayCalendar}>
             <div className='card-content'>
                 <section className='icon'>
                     <FaHospital size={90} style={{ 
@@ -27,6 +67,33 @@ const Card = ({medicalCenter}) => {
                     </div>
                 </section>
             </div>
+            {showCalendar && (
+                <>
+                    <hr className='division'/>
+                    <div className='calendar'>
+                        <Swiper
+                        spaceBetween={50}
+                        slidesPerView={3}
+                        onSlideChange={() => console.log('slide change')}
+                        onSwiper={(swiper) => console.log(swiper)}
+                        >
+                            {weekDays.map((day, index) => (
+                                <SwiperSlide className={selectedIndex !== index ? 'day' : 'day selected'}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDaySelection(index, day);
+                                }} 
+                                key={index}>{day}</SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <section className='slots'>
+                            <div className='morning-slot'></div>
+                            <div className='afternoon-slot'></div>
+                            <div className='evening-slot'></div>
+                        </section>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
