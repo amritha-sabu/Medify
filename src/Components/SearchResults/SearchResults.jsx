@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "../LandingPage/Navbar";
 import './SearchResults.css';
-import Card from "./Card";
+import Card from "./Card"
 
 const SearchResults = () => {
     const location = useLocation();

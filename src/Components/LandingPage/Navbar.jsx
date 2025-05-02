@@ -1,6 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/my-bookings');
+    }
+
     return(
         <div className="navbar">
             <section className="top-header">
@@ -19,7 +26,7 @@ const Navbar = () => {
                     <a href='#'>Facilities</a>
                 </div>
                 <div className='booking-button'>
-                    <button>My Bookings</button>
+                    <button onClick={handleClick}>My Bookings</button>
                 </div>
             </section>
         </div>

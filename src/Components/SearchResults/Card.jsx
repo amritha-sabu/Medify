@@ -1,17 +1,17 @@
 import { FaHospital, FaThumbsUp  } from 'react-icons/fa';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import 'swiper/css';
 import './Card.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+// localStorage.clear();
 
 const Card = ({medicalCenter}) => {
     const [showCalendar, setShowCalendar] = useState(false);
     const [tabValue, setTabValue] = useState(0);
     const [selectedTime, setselectedTime] = useState(null);
+    const hospitalKey = medicalCenter["Hospital Name"];
 
     const generateWeekDays = () => {
         const days = [];
@@ -75,22 +75,58 @@ const Card = ({medicalCenter}) => {
             });
     
             console.log(`Booked ${selectedTime} on ${selectedDay}`);
+            console.log(medicalCenter);
+            const datePart = selectedDay.split(',')[1];
+            const year = new Date().getFullYear();
+            const fullDate = new Date(`${datePart}, ${year}`);
+            const formattedDate = fullDate.toISOString().split('T')[0];
+            const newBooking = {
+                "Hospital Name": medicalCenter["Hospital Name"],
+                "City": medicalCenter["City"],
+                "State": medicalCenter["State"],
+                "Hospital Type": medicalCenter["Hospital Type"],
+                "Hospital overall rating": medicalCenter["Hospital overall rating"],
+                bookingDate: formattedDate,
+                bookingTime: selectedTime,
+            }
             setselectedTime(null); // reset selection if needed
+            let allBookings = JSON.parse(localStorage.getItem('allBookings')) || {};
+            const updatedBookingList = {...allBookings, newBooking};
+            console.log(updatedBookingList, newBooking);
+            localStorage.setItem('allBookings', JSON.stringify(updatedBookingList));
         }
     };
     
 
-    const [timeSlots, setTimeSlots] = useState(() => {
-        const slots = {};
-        generateWeekDays().forEach((_, i) => {
-            slots[i] = {
-                morning: ['9:00 AM', '9:30 AM', '10:00 AM'],
-                afternoon: ['1:00 PM', '1:30 PM', '2:00 PM'],
-                evening: ['5:00 PM', '5:30 PM', '6:00 PM'],
-            };
-        });
-        return slots;
-    });
+    const [timeSlots, setTimeSlots] = useState({});
+
+    useEffect(() => {
+        const storedAllSlots = JSON.parse(localStorage.getItem('timeSlots')) || {};
+        if (storedAllSlots[hospitalKey]) {
+            setTimeSlots(storedAllSlots[hospitalKey]);
+        } else {
+            const slots = {};
+            weekDays.forEach((_, i) => {
+                slots[i] = {
+                    morning: ['9:00 AM', '9:30 AM', '10:00 AM'],
+                    afternoon: ['1:00 PM', '1:30 PM', '2:00 PM'],
+                    evening: ['5:00 PM', '5:30 PM', '6:00 PM'],
+                };
+            });
+            storedAllSlots[hospitalKey] = slots;
+            localStorage.setItem('timeSlots', JSON.stringify(storedAllSlots));
+            setTimeSlots(slots);
+        }
+    }, []);
+    
+
+    useEffect(() => {
+        if (Object.keys(timeSlots).length > 0) {
+            const allSlots = JSON.parse(localStorage.getItem('timeSlots')) || {};
+            allSlots[hospitalKey] = timeSlots;
+            localStorage.setItem('timeSlots', JSON.stringify(allSlots));
+        }
+    }, [timeSlots])
 
     return(
         <div className="card" onClick={displayCalendar}>
@@ -113,7 +149,10 @@ const Card = ({medicalCenter}) => {
                             <FaThumbsUp style={{ marginRight: '5px' }} />
                             {medicalCenter["Hospital overall rating"]}
                         </button>
-                        <button className='book-now' onClick={() => handleBooking()}>Book Free Center Visit</button>
+                        <button type='submit' className='book-now' onClick={(e) => {
+                            e.stopPropagation();
+                            handleBooking();
+                        }}>Book Free Center Visit</button>
                     </div>
                 </section>
             </div>
@@ -198,58 +237,3 @@ const Card = ({medicalCenter}) => {
 };
 
 export default Card;
-
-{/* <div className='calendar'>
-<Swiper
-spaceBetween={50}
-slidesPerView={3}
-onSlideChange={() => console.log('slide change')}
-onSwiper={(swiper) => console.log(swiper)}
->
-    {weekDays.map((day, index) => (
-        <SwiperSlide className={selectedIndex !== index ? 'day' : 'day selected'}
-        onClick={(e) => {
-            e.stopPropagation();
-            handleDaySelection(index, day);
-        }} 
-        key={index}>{day}</SwiperSlide>
-    ))}
-</Swiper>
-</div>
-<div className='appointment-slots'>
-<section className='slots'>
-    <div className='morning-slot'>
-        <p>Morning</p>
-        <div className='slot-buttons'>
-            {timeSlots.morning.map((time, index) => (
-                <button className={selectedTime !== time ? 'slot-btn' : 'slot-btn selected'} key={index} onClick={(e) => {
-                    e.stopPropagation();
-                    handleTimeSelect(time);
-                }}>{time}</button>
-            ))}
-        </div>
-    </div>
-    <div className='afternoon-slot'>
-        <p>Afternoon</p>
-        <div className='slot-buttons'>
-            {timeSlots.afternoon.map((time, index) => (
-                <button className={selectedTime !== time ? 'slot-btn' : 'slot-btn selected'} key={index} onClick={(e) => {
-                    e.stopPropagation();
-                    handleTimeSelect(time);
-                }}>{time}</button>
-            ))}
-        </div>
-    </div>
-    <div className='evening-slot'>
-        <p>Evening</p>
-        <div className='slot-buttons'>
-            {timeSlots.evening.map((time, index) => (
-                <button className={selectedTime !== time ? 'slot-btn' : 'slot-btn selected'} key={index} onClick={(e) => {
-                    e.stopPropagation();
-                    handleTimeSelect(time);
-                }}>{time}</button>
-            ))}
-        </div>
-    </div>
-</section>
-</div> */}
