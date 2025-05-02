@@ -61,9 +61,11 @@
     border: none;
     border-radius: 7px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .division{
+    width: 100%;
     border: none;
     border-top: 1px solid #ccc;
     margin: 20px 0;
@@ -80,7 +82,46 @@
 }
 
 .day.selected{
-    font-size: 19px;
     border-bottom: 3px solid rgba(42, 167, 255, 1);
     font-weight: bold;
+}
+
+.appointment-slots{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    font-size: 16px;
+    padding: 30px;
+}
+
+.slot-group{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 40px;
+}
+
+.slot-group p{
+    width: 80px;
+}
+
+.slot-btn{
+    background-color: white;
+    color: rgba(42, 167, 255, 1);
+    font-size: 18px;
+    padding: 10px 15px;
+    border: 1px solid rgba(42, 167, 255, 1);
+    margin-right: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.slot-btn.selected{
+    background-color: rgba(42, 167, 255, 1);
+    color: white;
+    font-size: 20px;
 }

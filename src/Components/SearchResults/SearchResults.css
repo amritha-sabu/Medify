@@ -49,7 +49,7 @@
 
 .search-results-body{
     width: 100%;
-    height: 100vh;
+    height: auto;
     background: linear-gradient(81deg, #EFF5FE 9.01%, rgba(241, 247, 255, 0.47) 89.11%);
     display: flex;
     justify-content: center;
