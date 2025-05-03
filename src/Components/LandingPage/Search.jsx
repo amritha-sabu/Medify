@@ -1,3 +1,4 @@
+import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import { FaUserMd, FaVials, FaHospital, FaPills, FaAmbulance } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import {useNavigate } from 'react-router-dom';
@@ -69,6 +70,46 @@ const Search = () => {
             <div className='search-container'>
                 <div className='search-form'>
                     <form onSubmit={(e) => findMedicalCenters(e)}>
+                        <FormControl fullWidth id='state' sx={{ mb: 2 }}>
+                            <InputLabel id="state-label">State</InputLabel>
+                            <Select
+                            labelId="state-label"
+                            value={selectedState}
+                            label="State"
+                            onChange={handleStateChange}
+                            sx={{width: 220}}
+                            >
+                            {states.map((state, index) => (
+                                <MenuItem key={index} value={state}>{state}</MenuItem>
+                            ))}
+                            </Select>
+                        </FormControl>
+
+                        <FormControl fullWidth id='city' sx={{ mb: 2 }} disabled={!selectedState}>
+                            <InputLabel id="city-label">City</InputLabel>
+                            <Select
+                            labelId="city-label"
+                            value={selectedCity}
+                            label="City"
+                            onChange={handleCityChange}
+                            sx={{width: 220}}
+                            >
+                            {cities.map((city, index) => (
+                                <MenuItem key={index} value={city}>{city}</MenuItem>
+                            ))}
+                            </Select>
+                        </FormControl>
+
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            id='searchBtn'
+                            className='searchBtn'
+                        >
+                            Search
+                        </Button>
+                    </form>
+                    {/* <form onSubmit={(e) => findMedicalCenters(e)}>
                         <div id='state'>
                             <select value={selectedState} onChange={handleStateChange}>
                                 <option value="" disabled>State</option>
@@ -86,7 +127,7 @@ const Search = () => {
                             </select>
                         </div>
                         <button type='submit' id='searchBtn'>Search</button>
-                    </form>
+                    </form> */}
                 </div>
                 <div className='search-categories'>
                     <p>You may be looking for</p>

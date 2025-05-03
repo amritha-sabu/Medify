@@ -30,14 +30,13 @@
     padding: 10px;
 }
 
-.search-form form button{
-    width: 220px;
+.searchBtn{
+    width: 250px;
     border: none;
     background-color: rgba(42, 167, 255, 1);
     color: white;
     border-radius: 5px;
     font-size: 19px;
-    padding: 15px;
     cursor: pointer;
 }
 
