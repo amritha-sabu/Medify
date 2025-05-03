@@ -57,6 +57,11 @@ const Card = ({medicalCenter}) => {
     };
 
     const handleBooking = () => {
+        if (!showCalendar) {
+            setShowCalendar(true);
+            return;
+        }
+        
         if (selectedDay && selectedTime) {
             setTimeSlots((prev) => {
                 const updatedSlots = { ...prev };
@@ -162,6 +167,15 @@ const Card = ({medicalCenter}) => {
                     <div className='calendar'>
                         <Box sx={{ width: '100%' }}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <div className="day-labels">
+                                    {weekDays.map((day, index) => {
+                                        // Extract the first part of the day string (e.g., "Today" from "Today, May 4")
+                                        const dayLabel = day.split(',')[0];
+                                        return (
+                                            <p key={index} className="day-label">{dayLabel}</p>
+                                        );
+                                    })}
+                                </div>
                                 <Tabs
                                 value={tabValue}
                                 variant="scrollable"
@@ -172,12 +186,7 @@ const Card = ({medicalCenter}) => {
                                         sx={{width: 250}}
                                         className={selectedDay === day ? 'day selected' : 'day'} 
                                         key={index} 
-                                        label={
-                                            <p data-cy={`day-${index}`} className="day-label">
-                                                {day.split(',')[0]}
-                                                <span className="day-date">{day.split(',')[1]}</span>
-                                            </p>
-                                        }
+                                        label={day}
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleDaySelection(day, index);
@@ -190,7 +199,7 @@ const Card = ({medicalCenter}) => {
                                     <div className='slot-group'>
                                         <p>Morning</p>
                                         <div className='slot-buttons'>
-                                            {timeSlots[tabValue].morning.map((time, index) => (
+                                            {timeSlots[tabValue]?.morning?.map((time, index) => (
                                                 <button 
                                                 key={index} 
                                                 className={selectedTime === time ? 'slot-btn selected' : 'slot-btn'}
@@ -205,7 +214,7 @@ const Card = ({medicalCenter}) => {
                                     <div className='slot-group'>
                                         <p>Afternoon</p>
                                         <div className='slot-buttons'>
-                                            {timeSlots[tabValue].afternoon.map((time, index) => (
+                                            {timeSlots[tabValue]?.afternoon?.map((time, index) => (
                                                 <button 
                                                 key={index} 
                                                 className={selectedTime === time ? 'slot-btn selected' : 'slot-btn'}
@@ -220,7 +229,7 @@ const Card = ({medicalCenter}) => {
                                     <div className='slot-group'>
                                         <p>Evening</p>
                                         <div className='slot-buttons'>
-                                            {timeSlots[tabValue].evening.map((time, index) => (
+                                            {timeSlots[tabValue]?.evening?.map((time, index) => (
                                                 <button 
                                                 key={index} 
                                                 className={selectedTime === time ? 'slot-btn selected' : 'slot-btn'}

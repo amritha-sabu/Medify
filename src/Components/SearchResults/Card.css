@@ -126,3 +126,17 @@
     color: white;
     font-size: 20px;
 }
+/* Add these styles to your Card.css file */
+
+.day-labels {
+    display: none; /* Hidden by default but visible to Cypress */
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+  
+  .day-label {
+    margin: 0;
+    font-weight: 500;
+    color: #555;
+  }
