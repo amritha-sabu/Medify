@@ -172,7 +172,12 @@ const Card = ({medicalCenter}) => {
                                         sx={{width: 250}}
                                         className={selectedDay === day ? 'day selected' : 'day'} 
                                         key={index} 
-                                        label={day}
+                                        label={
+                                            <p data-cy={`day-${index}`} className="day-label">
+                                                {day.split(',')[0]}
+                                                <span className="day-date">{day.split(',')[1]}</span>
+                                            </p>
+                                        }
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleDaySelection(day, index);
@@ -182,7 +187,6 @@ const Card = ({medicalCenter}) => {
                                     ))}
                                 </Tabs>
                                 <Box className='time-slots'>
-                                    <p>Today</p>
                                     <div className='slot-group'>
                                         <p>Morning</p>
                                         <div className='slot-buttons'>
