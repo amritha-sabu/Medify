@@ -1,0 +1,132 @@
+.booking-search-box{
+    width: 100%;
+    height: 15vh;
+    background-color: rgba(12, 140, 229, 1);
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.booking-search-box h1{
+    color: white;
+    font-size: 44px;
+}
+
+.booking-search-box-form{
+    position: relative;
+    z-index: 1;
+    width: 780px;
+    height: 111px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 15px;
+    top: 50px;
+    box-shadow: 6px 6px 35px 0px rgba(16, 40, 81, 0.11);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.booking-search-box-form form{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.booking-search-box-form form input{
+    height: 30px;
+    width: 500px;
+    border: solid rgba(172, 172, 172, 0.635) 2px;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    color: rgb(214, 214, 214);
+}
+
+.booking-search-box-form form button{
+    width: 177px;
+    border: none;
+    background-color: rgba(42, 167, 255, 1);
+    color: white;
+    border-radius: 5px;
+    font-size: 19px;
+    padding: 15px;
+}
+
+.all-bookings{
+    width: 100%;
+    height: auto;
+    background: linear-gradient(81deg, #EFF5FE 9.01%, rgba(241, 247, 255, 0.47) 89.11%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booked-card{
+    width: 850px;
+    height: auto;
+    background-color: white;
+    margin-bottom: 30px;
+    margin-top: 100px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.booked-card-content{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.booked-hospital-details{
+    width: 100%;
+}
+
+.booked-details{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.booked-details-1{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    line-height: 1px;
+    padding: 25px 20px 0 0;
+}
+
+.booked-details-2{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.booked-details-2 p{
+    background-color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -12px;
+    padding: 10px;
+}
+
+.booked-details-2 .date{
+    color: rgba(42, 167, 255, 1);
+    border: 1px solid rgba(42, 167, 255, 1);
+}
+
+.booked-details-2 .time{
+    color: rgba(0, 165, 0, 1);
+    border: 1px solid rgba(0, 165, 0, 1);
+    margin-right: 20px;
+}
+
+.booked-details h2{
+    color: rgba(42, 167, 255, 1);
+}
+
+.no-bookings{
+    margin-top: 200px;
+    color: rgba(75, 73, 73, 0.489);
+}

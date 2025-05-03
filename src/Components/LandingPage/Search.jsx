@@ -69,19 +69,23 @@ const Search = () => {
             <div className='search-container'>
                 <div className='search-form'>
                     <form onSubmit={(e) => findMedicalCenters(e)}>
-                        <select value={selectedState} onChange={handleStateChange}>
-                            <option value="" disabled>State</option>
-                            {states.map((state, index) => (
-                                <option key={index} value={state}>{state}</option>
-                            ))}
-                        </select>
-                        <select value={selectedCity} onChange={handleCityChange}>
-                            <option value="" disabled>City</option>
-                            {cities.map((state, index) => (
-                                <option key={index} value={state}>{state}</option>
-                            ))}
-                        </select>
-                        <button type='submit'>Search</button>
+                        <div id='state'>
+                            <select value={selectedState} onChange={handleStateChange}>
+                                <option value="" disabled>State</option>
+                                {states.map((state, index) => (
+                                    <option key={index} value={state}>{state}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div id='city'>
+                            <select value={selectedCity} onChange={handleCityChange}>
+                                <option value="" disabled>City</option>
+                                {cities.map((state, index) => (
+                                    <option key={index} value={state}>{state}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <button type='submit' id='searchBtn'>Search</button>
                     </form>
                 </div>
                 <div className='search-categories'>

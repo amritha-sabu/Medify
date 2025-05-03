@@ -90,10 +90,10 @@ const Card = ({medicalCenter}) => {
                 bookingTime: selectedTime,
             }
             setselectedTime(null); // reset selection if needed
-            let allBookings = JSON.parse(localStorage.getItem('allBookings')) || {};
-            const updatedBookingList = {...allBookings, newBooking};
+            let allBookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            const updatedBookingList = [...allBookings, newBooking];
             console.log(updatedBookingList, newBooking);
-            localStorage.setItem('allBookings', JSON.stringify(updatedBookingList));
+            localStorage.setItem('bookings', JSON.stringify(updatedBookingList));
         }
     };
     
@@ -140,7 +140,7 @@ const Card = ({medicalCenter}) => {
                 </section>  
                 <section className='hospital-details'>
                     <div className='details'>
-                        <h2>{medicalCenter["Hospital Name"]}</h2>
+                        <h3>{medicalCenter["Hospital Name"]}</h3>
                         <p>{medicalCenter["City"]}, {medicalCenter["State"]}</p>
                         <p>{medicalCenter["Hospital Type"]}</p>
                     </div>
@@ -152,7 +152,7 @@ const Card = ({medicalCenter}) => {
                         <button type='submit' className='book-now' onClick={(e) => {
                             e.stopPropagation();
                             handleBooking();
-                        }}>Book Free Center Visit</button>
+                        }}>Book FREE Center Visit</button>
                     </div>
                 </section>
             </div>
@@ -177,10 +177,12 @@ const Card = ({medicalCenter}) => {
                                             e.stopPropagation();
                                             handleDaySelection(day, index);
                                         }}
-                                        />
+                                        >
+                                        </Tab>
                                     ))}
                                 </Tabs>
                                 <Box className='time-slots'>
+                                    <p>Today</p>
                                     <div className='slot-group'>
                                         <p>Morning</p>
                                         <div className='slot-buttons'>

@@ -32,8 +32,9 @@
     padding-left: 20px;
 }
 
-.details h2{
+.details h3{
     color: rgba(42, 167, 255, 1);
+    font-size: 18px;
 }
 
 .booking{

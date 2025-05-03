@@ -11,7 +11,7 @@ const SearchResults = () => {
     const [cities, setCities] = useState([]);
     const [medicalCenters, setMedicalCenters] = useState(location.state.medicalCenters || []);
     const [selectedState, setSelectedState] = useState(location.state.selectedState || '');
-    const [selectedCity, setSelectedCity] = useState(location.state.selectedCity|| '');
+    const [selectedCity, setSelectedCity] = useState(location.state.selectedCity.toLowerCase()|| '');
 
     useEffect(() => {
         const fetchState = async() => {
@@ -82,7 +82,7 @@ const SearchResults = () => {
                                 <option key={index} value={state}>{state}</option>
                             ))}
                         </select>
-                        <button type='submit'>Search</button>
+                        <button type='submit' id="searchBtn">Search</button>
                     </form>
                 </div>
             </div>
@@ -90,7 +90,7 @@ const SearchResults = () => {
                 {medicalCenters.length ? 
                 (
                     <div>
-                        <h2>{medicalCenters.length} Medical Centers available in {selectedState}, {selectedCity}</h2>
+                        <h1>{medicalCenters.length} medical centers available in {selectedCity}</h1>
                         {medicalCenters.map((medicalCenter, index) => (
                             <Card medicalCenter={medicalCenter} key={index}/>
                         ))}
