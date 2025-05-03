@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { FaHospital, FaThumbsUp } from 'react-icons/fa';
+import { FaHospital, FaThumbsUp  } from 'react-icons/fa';
 import Navbar from "../LandingPage/Navbar";
 import './BookingPage.css';
 
 const BookingPage = () => {
     const [allBookings, setAllBookings] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const stored = localStorage.getItem('bookings');
         if (stored) {
             setAllBookings(JSON.parse(stored));
         }
-        setLoading(false);
     }, []);
 
-    return (
-        <div className="bookings-page" data-testid="bookings-container">
+    return(
+        <div className="bookings-page">
             <Navbar />
             <div className="booking-search-box">
                 <h1>My Bookings</h1>
@@ -28,23 +26,17 @@ const BookingPage = () => {
                 </div>
             </div>
             <div className="all-bookings">
-                {loading ? (
-                    <p>Loading...</p>
-                ) : allBookings.length > 0 ? (
+                {allBookings.length > 0 ? (
                     allBookings.map((booking, index) => (
-                        <div className='booked-card' key={index}>
-                            <div className='booked-card-content'>
+                        <div className='booked-card'>
+                            <div key={index} className='booked-card-content'>
                                 <section className='icon'>
-                                    <FaHospital
-                                        size={90}
-                                        style={{
-                                            color: 'rgb(255, 255, 255)',
-                                            backgroundColor: 'rgba(42, 167, 255, 1)',
-                                            padding: '17px',
-                                            borderRadius: '60px'
-                                        }}
-                                    />
-                                </section>
+                                    <FaHospital size={90} style={{ 
+                                        color: 'rgb(255, 255, 255)', 
+                                        backgroundColor: 'rgba(42, 167, 255, 1)',
+                                        padding: '17px',
+                                        borderRadius: '60px' }}/>
+                                </section>  
                                 <section className='booked-hospital-details'>
                                     <div className='booked-details'>
                                         <div className='booked-details-1'>
@@ -67,7 +59,7 @@ const BookingPage = () => {
                             </div>
                         </div>
                     ))
-                ) : (
+                ):(
                     <div className="no-bookings">
                         <h1>No Bookings</h1>
                     </div>
