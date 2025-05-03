@@ -7,8 +7,8 @@ const BookingPage = () => {
     return(
         <div className="bookings-page">
             <Navbar />
-            <div className="booking-search-box">
                 <h1>My Bookings</h1>
+            <div className="booking-search-box">
                 <div className="booking-search-box-form">
                     <form>
                         <input type="text" placeholder="Search By Hospital" />
