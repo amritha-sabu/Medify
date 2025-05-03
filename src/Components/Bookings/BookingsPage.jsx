@@ -1,15 +1,23 @@
-import { FaHospital, FaThumbsUp } from 'react-icons/fa';
+import { useEffect, useState } from "react";
+import { FaHospital, FaThumbsUp  } from 'react-icons/fa';
 import Navbar from "../LandingPage/Navbar";
 import './BookingPage.css';
 
 const BookingPage = () => {
-    const allBookings = JSON.parse(localStorage.getItem('bookings')) || [];
-    
-    return (
-        <div className="bookings-page" data-testid="bookings-page">
+    const [allBookings, setAllBookings] = useState([]);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('bookings');
+        if (stored) {
+            setAllBookings(JSON.parse(stored));
+        }
+    }, []);
+
+    return(
+        <div className="bookings-page">
             <Navbar />
             <div className="booking-search-box">
-                <h1 data-testid="bookings-heading">My Bookings</h1>
+                <h1>My Bookings</h1>
                 <div className="booking-search-box-form">
                     <form>
                         <input type="text" placeholder="Search By Hospital" />
@@ -20,11 +28,11 @@ const BookingPage = () => {
             <div className="all-bookings">
                 {allBookings.length > 0 ? (
                     allBookings.map((booking, index) => (
-                        <div className='booked-card' key={index}>
-                            <div className='booked-card-content'>
+                        <div className='booked-card'>
+                            <div key={index} className='booked-card-content'>
                                 <section className='icon'>
-                                    <FaHospital size={90} style={{
-                                        color: 'rgb(255, 255, 255)',
+                                    <FaHospital size={90} style={{ 
+                                        color: 'rgb(255, 255, 255)', 
                                         backgroundColor: 'rgba(42, 167, 255, 1)',
                                         padding: '17px',
                                         borderRadius: '60px' }}/>
@@ -51,7 +59,7 @@ const BookingPage = () => {
                             </div>
                         </div>
                     ))
-                ) : (
+                ):(
                     <div className="no-bookings">
                         <h1>No Bookings</h1>
                     </div>
