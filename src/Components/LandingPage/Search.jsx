@@ -70,32 +70,46 @@ const Search = () => {
             <div className='search-container'>
                 <div className='search-form'>
                     <form onSubmit={(e) => findMedicalCenters(e)}>
-                        <FormControl fullWidth id='state' sx={{ mb: 2 }}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <InputLabel id="state-label">State</InputLabel>
                             <Select
+                            id="state"
+                            data-cy="state-select"
                             labelId="state-label"
                             value={selectedState}
                             label="State"
                             onChange={handleStateChange}
                             sx={{width: 220}}
+                            MenuProps={{
+                                PaperProps: {
+                                    'data-cy': 'state-menu'
+                                }
+                            }}
                             >
                             {states.map((state, index) => (
-                                <MenuItem key={index} value={state}>{state}</MenuItem>
+                                <MenuItem key={index} value={state} data-cy={`state-option-${state}`}>{state}</MenuItem>
                             ))}
                             </Select>
                         </FormControl>
 
-                        <FormControl fullWidth id='city' sx={{ mb: 2 }} disabled={!selectedState}>
+                        <FormControl fullWidth sx={{ mb: 2 }} disabled={!selectedState}>
                             <InputLabel id="city-label">City</InputLabel>
                             <Select
+                            id="city"
+                            data-cy="city-select"
                             labelId="city-label"
                             value={selectedCity}
                             label="City"
                             onChange={handleCityChange}
                             sx={{width: 220}}
+                            MenuProps={{
+                                PaperProps: {
+                                    'data-cy': 'city-menu'
+                                }
+                            }}
                             >
                             {cities.map((city, index) => (
-                                <MenuItem key={index} value={city}>{city}</MenuItem>
+                                <MenuItem key={index} value={city} data-cy={`city-option-${city}`}>{city}</MenuItem>
                             ))}
                             </Select>
                         </FormControl>
@@ -109,25 +123,6 @@ const Search = () => {
                             Search
                         </Button>
                     </form>
-                    {/* <form onSubmit={(e) => findMedicalCenters(e)}>
-                        <div id='state'>
-                            <select value={selectedState} onChange={handleStateChange}>
-                                <option value="" disabled>State</option>
-                                {states.map((state, index) => (
-                                    <option key={index} value={state}>{state}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div id='city'>
-                            <select value={selectedCity} onChange={handleCityChange}>
-                                <option value="" disabled>City</option>
-                                {cities.map((state, index) => (
-                                    <option key={index} value={state}>{state}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <button type='submit' id='searchBtn'>Search</button>
-                    </form> */}
                 </div>
                 <div className='search-categories'>
                     <p>You may be looking for</p>
