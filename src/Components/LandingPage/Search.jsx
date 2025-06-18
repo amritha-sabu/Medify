@@ -74,17 +74,10 @@ const Search = () => {
                             <InputLabel id="state-label">State</InputLabel>
                             <Select
                             id="state"
-                            data-cy="state-select"
-                            labelId="state-label"
                             value={selectedState}
                             label="State"
                             onChange={handleStateChange}
                             sx={{width: 220}}
-                            MenuProps={{
-                                PaperProps: {
-                                    'data-cy': 'state-menu'
-                                }
-                            }}
                             >
                             {states.map((state, index) => (
                                 <MenuItem key={index} value={state} data-cy={`state-option-${state}`}>{state}</MenuItem>
@@ -96,17 +89,10 @@ const Search = () => {
                             <InputLabel id="city-label">City</InputLabel>
                             <Select
                             id="city"
-                            data-cy="city-select"
-                            labelId="city-label"
                             value={selectedCity}
                             label="City"
                             onChange={handleCityChange}
                             sx={{width: 220}}
-                            MenuProps={{
-                                PaperProps: {
-                                    'data-cy': 'city-menu'
-                                }
-                            }}
                             >
                             {cities.map((city, index) => (
                                 <MenuItem key={index} value={city} data-cy={`city-option-${city}`}>{city}</MenuItem>
