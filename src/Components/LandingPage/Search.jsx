@@ -80,7 +80,7 @@ const Search = () => {
                             sx={{width: 220}}
                             >
                             {states.map((state, index) => (
-                                <MenuItem key={index} value={state} data-cy={`state-option-${state}`}>{state}</MenuItem>
+                                <MenuItem key={index} value={state}>{state}</MenuItem>
                             ))}
                             </Select>
                         </FormControl>
@@ -95,7 +95,7 @@ const Search = () => {
                             sx={{width: 220}}
                             >
                             {cities.map((city, index) => (
-                                <MenuItem key={index} value={city} data-cy={`city-option-${city}`}>{city}</MenuItem>
+                                <MenuItem key={index} value={city}>{city}</MenuItem>
                             ))}
                             </Select>
                         </FormControl>
